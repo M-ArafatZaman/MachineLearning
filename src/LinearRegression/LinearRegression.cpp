@@ -53,16 +53,31 @@ pair<float, float> linearRegression(vector<T>& xs, vector<T>& ys) {
     return {m, b};
 };
 
+
+// Test runner exception
+class FailedTest: public exception {
+    public:
+        FailedTest(string err) {
+            cout << err << endl;
+        }
+};
+
+void test_runner() {
+    vector<int> x = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    vector<int> y = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    pair<float, float> equation = linearRegression(x, y);
+    float m = 1, b = 0;
+
+    if (equation.first != m) throw FailedTest("Failed to calculate gradient 'm' properly.");
+    if (equation.second != b) throw FailedTest("Failed to calculate y-intersect 'b' properly.");
+
+    cout << "All tests passed!" << endl;
+}
+
+
 int main() {
 
-    // This dataset is has a positive correlation with the y-intersect being close to the origin (0,0)
-    vector<int> x = {1, 2, 4, 6,  8, 10, 15, 17};
-    vector<int> y = {1, 3, 2, 6, 11, 10, 13, 20};
-    
-    pair<float, float> equation = linearRegression(x, y);
-
-    cout << "m = " << equation.first << endl;
-    cout << "b = " << equation.second << endl;
+    test_runner();
 
     return 0;
 }
