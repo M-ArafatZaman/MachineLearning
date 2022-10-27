@@ -6,6 +6,14 @@
 using namespace std;
 
 
+// Exception class
+class L_Exception: public exception {
+    public:
+        L_Exception(string err) {
+            cout << "LinearRegressionError: " << err << endl;
+        };
+};
+
 // Function to perform linear regression analysis
 template <class T>
 pair<float, float> linearRegression(vector<T>& xs, vector<T>& ys) {
@@ -19,6 +27,11 @@ pair<float, float> linearRegression(vector<T>& xs, vector<T>& ys) {
     // Size of xs and ys
     int N_x = xs.size();
     int N_y = ys.size();
+
+    // The two sizes must be equal
+    if (N_x != N_y) {
+        throw L_Exception("Two vectors are not equal.");
+    }
 
     // Calculate average of x and y
     float avg_x = accumulate(xs.begin(), xs.end(), 0) / N_x; 
