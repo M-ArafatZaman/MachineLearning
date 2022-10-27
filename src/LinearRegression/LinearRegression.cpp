@@ -6,7 +6,7 @@
 using namespace std;
 
 
-// Function to perform linear regression analyisis
+// Function to perform linear regression analysis
 template <class T>
 pair<float, float> linearRegression(vector<T>& xs, vector<T>& ys) {
     /* 
